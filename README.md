@@ -13,7 +13,8 @@ The *Arduino Mega* was chosen mainly because it has four serial communication po
 To be completely honest, I added the ESP32 because it supports the *micro-ROS* library, which made it possible to publish the odometry data coming from the Mega. Without that, integrating low-level feedback into the ROS2 ecosystem would’ve been a lot messier.
 I also took advantage of the ESP32 by offloading some initial tasks to it—like performing sensor fusion with the IMU. It made sense to handle that locally before passing data into the ROS2 pipeline, and it helped reduce the load on the Raspberry Pi. (See the figure below.)
 
-########## FIGURE ONE ###########
+<img width="2048" height="1137" alt="figure_1" src="Docs/figures/figure_1.png" />
+
 
 The codebase is pretty diverse—it includes Simulink models, Arduino IDE code (C++), Python scripts, and a bunch of configuration files sprinkled throughout. Hope you enjoy digging into it 😉.
 
