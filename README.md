@@ -18,6 +18,8 @@ The third—and thankfully final—compromise was using the [YDLiDAR ROS2 Driver
 <img width="2048" height="1137" alt="figure_1" src="Docs/figures/figure_1.png" />
 
 
-The codebase is pretty diverse—it includes Simulink models, Arduino IDE code (C++), Python scripts, and a bunch of configuration files sprinkled throughout. Hope you enjoy digging into it 😉.
+The codebase is pretty diverse—it includes Simulink models, Arduino IDE code (C++), Python scripts, and a bunch of configuration files sprinkled throughout. Hope you enjoy digging into it 😉. 
 
 GODA
+
+**System Design**
