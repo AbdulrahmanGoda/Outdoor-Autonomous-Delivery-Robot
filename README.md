@@ -25,4 +25,6 @@ The codebase is pretty diverse—it includes Simulink models, Arduino IDE code (
 
 As I hinted before, code execution is distributed across three platforms—Raspberry Pi, ESP32, and Arduino Mega. Each one handles a specific set of tasks to keep the system responsive and modular. For the Pi, and under the Models directory, you can find the core [VFH models](Models/vector-field-histogram-VFH). There are three main ones: one used for navigating from [start to goal](Models/vector-field-histogram-VFH/final_model.slx), another for navigating between [consecutive waypoints](Models/vector-field-histogram-VFH/final_model_waypoints.slx), and a third that was just used for [testing](Models/vector-field-histogram-VFH/vfh_testing.slx). Each model reflects a different stage of development, so feel free to explore them based on what you're trying to achieve.
 
-The ESP32 was programmed using the fantastic mirco-ROS library, the respective files can be found [here](Src/arduinoIDE).
+The ESP32 was programmed using the fantastic mirco-ROS library, the respective files can be found [here](Src/arduinoIDE). As for the Arduino, the control models are hanging out just about [here](Models/differential-controller).
+
+Additional ROS packages that made development and testing way easier can be found in a separate repo. It’s mainly there to simplify the build process and keep this main repo a little less messy. [Link]
