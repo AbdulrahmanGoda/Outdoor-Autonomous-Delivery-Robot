@@ -1,2 +1,2 @@
-*.slx linguist-language=Matlab
+*.slx linguist-language=Simulink
 *.mlx linguist-language=Matlab
