@@ -21,7 +21,7 @@ The codebase is pretty diverse—it includes Simulink models, Arduino IDE code (
 
 ## Communication Protocols
 
-Achieving interoperability—aka getting three entirely different systems to work together and function as one cohesive unit—wasn’t exactly a walk in the park. But it was genuinely rewarding. At the heart of it all was communication: making sure each component could reliably exchange data, stay in sync, and respond in real time. That’s what turned a scattered set of devices into a unified system.
+Achieving *interoperability*—aka getting three entirely different systems to work together and function as one cohesive unit—wasn’t exactly a walk in the park. But it was genuinely rewarding. At the heart of it all was communication: making sure each component could reliably exchange data, stay in sync, and respond in real time. That’s what turned a scattered set of devices into a unified system.
 
 Generally speaking, I had to build two bridges to connect the three devices: one between the Arduino Mega and the ESP32, and another between the ESP32 and the Raspberry Pi. Each bridge supports bidirectional data flow, allowing commands, feedback, and sensor readings to move freely between layers of the system.
 
@@ -53,7 +53,11 @@ The bridge between the ESP32 and Mega follows a basic serial communication setup
 
 **Pi <-> ESP32**
 
-Using micro-ROS library to integrate the ESP32 into the ROS ecosystem by publishing and subscribing to two custom ROS2 topics:
+Using micro-ROS library to integrate the ESP32 into the ROS ecosystem by publishing and subscribing to two different custom ROS2 topics:
+
+- */currect_pose* publishes the robot’s instantaneous pose—x, y, and theta. In this setup, the ESP32 acts as the publisher, while the Raspberry Pi subscribes to the topic to use the data for localization and decision-making.
+
+- */desired_theta* publishes the desired steering angle, calculated using the VFH algorithm (more on that later). Here, the Raspberry Pi is the publisher, and the ESP32 subscribes to receive and forward the command to the motor controller.
 
  
 ## Repository Breakdown
