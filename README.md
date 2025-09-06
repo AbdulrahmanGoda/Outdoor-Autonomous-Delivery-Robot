@@ -40,8 +40,7 @@ The bridge between the ESP32 and Mega follows a basic serial communication setup
     • Dummy Byte (1 byte): A fixed byte, 0xEE, which acts as a placeholder or an additional validation byte within the protocol.
     • Terminator (1 byte): A fixed byte, 0xEF, signaling the definitive end of the data packet, aiding in proper packet demarcation.
 
-<img width="1200" height="598" alt="figure_3" src="Docs/figures/figure_3.png" />
-
+ 
 **ESP32 -> Mega**
 
     • HEADER (1 byte): A fixed start byte, 0xAA, for packet synchronization and identification.
@@ -51,16 +50,14 @@ The bridge between the ESP32 and Mega follows a basic serial communication setup
     • Dummy Byte (1 byte): A fixed byte, 0xEE, included for protocol robustness and consistency.
     • TERMINATOR (1 byte): A fixed end byte, 0xEF, for clear packet demarcation.
 
-<img width="1249" height="643" alt="figure_5" src="Docs/figures/figure_5.png" />
-
+ 
 
 
 **Pi <-> ESP32**
 
 Using micro-ROS library to integrate the ESP32 into the ROS ecosystem by publishing and subscribing to two custom ROS2 topics:
 
-<img width="1180" height="506" alt="figure_4" src="Docs/figures/figure_4.png" />
-
+ 
 
 **Repo Breakdown**
 
