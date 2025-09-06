@@ -21,6 +21,29 @@ The third—and thankfully final—compromise was using the [YDLiDAR ROS2 Driver
 The codebase is pretty diverse—it includes Simulink models, Arduino IDE code (C++), Python scripts, and a bunch of configuration files sprinkled throughout. Hope you enjoy digging into it. 
 
 
+**Communication Protocols**
+
+Achieving interoperability—aka getting three entirely different systems to work together and function as one cohesive unit—wasn’t exactly a walk in the park. But it was genuinely rewarding. At the heart of it all was communication: making sure each component could reliably exchange data, stay in sync, and respond in real time. That’s what turned a scattered set of devices into a unified system.
+
+Generally speaking, I had to build two bridges to connect the three devices: one between the Arduino Mega and the ESP32, and another between the ESP32 and the Raspberry Pi. Each bridge supports bidirectional data flow, allowing commands, feedback, and sensor readings to move freely between layers of the system.
+
+ESP32 <-> Mega
+
+The communcation used was a basic serial communication with the following data protocol:
+
+    • Header (1 byte): A fixed byte, 0xAA, which serves as a clear indicator of the start of a valid data packet.
+    • Left Velocity (2 bytes): A signed 16-bit integer representing the instantaneous speed of the left wheel in RPM.
+    • Right Velocity (2 bytes): A signed 16-bit integer representing the instantaneous speed of the right wheel in RPM.
+    • XOR Checksum (1 byte): A single byte containing the Exclusive OR (XOR) checksum of the header and the four bytes representing the left and right velocities. This byte is used for basic error detection to ensure data integrity during transmission.
+    • Dummy Byte (1 byte): A fixed byte, 0xEE, which acts as a placeholder or an additional validation byte within the protocol.
+    • Terminator (1 byte): A fixed byte, 0xEF, signaling the definitive end of the data packet, aiding in proper packet demarcation.
+
+
+
+Pi <-> ESP32
+
+Using micro-ROS library to integrate the ESP32 into the ROS ecosystem by publishing and subscribing to two custom ROS2 topics:
+
 **Repo Breakdown**
 
 As I hinted before, code execution is distributed across three platforms—Raspberry Pi, ESP32, and Arduino Mega. Each one handles a specific set of tasks to keep the system responsive and modular. For the Pi, and under the Models directory, you can find the core [VFH models](Models/vector-field-histogram-VFH). There are three main ones: one used for navigating from [start to goal](Models/vector-field-histogram-VFH/final_model.slx), another for navigating between [consecutive waypoints](Models/vector-field-histogram-VFH/final_model_waypoints.slx), and a third that was just used for [testing](Models/vector-field-histogram-VFH/vfh_testing.slx). Each model reflects a different stage of development, so feel free to explore them based on what you're trying to achieve.
