@@ -55,9 +55,12 @@ The bridge between the ESP32 and Mega follows a basic serial communication setup
 
 
 
-Pi <-> ESP32
+**Pi <-> ESP32**
 
 Using micro-ROS library to integrate the ESP32 into the ROS ecosystem by publishing and subscribing to two custom ROS2 topics:
+
+<img width="1180" height="506" alt="figure_4" src="Docs/figures/figure_4.png" />
+
 
 **Repo Breakdown**
 
