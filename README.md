@@ -27,9 +27,11 @@ Achieving interoperability—aka getting three entirely different systems to wor
 
 Generally speaking, I had to build two bridges to connect the three devices: one between the Arduino Mega and the ESP32, and another between the ESP32 and the Raspberry Pi. Each bridge supports bidirectional data flow, allowing commands, feedback, and sensor readings to move freely between layers of the system.
 
-ESP32 <-> Mega
+<img width="1781" height="813" alt="figure_2" src="Docs/figures/figure_2.png" />
 
-The communcation used was a basic serial communication with the following data protocol:
+The bridge between the ESP32 and Mega follows a basic serial communication setup with the following data protocols:
+
+Mega -> ESP32
 
     • Header (1 byte): A fixed byte, 0xAA, which serves as a clear indicator of the start of a valid data packet.
     • Left Velocity (2 bytes): A signed 16-bit integer representing the instantaneous speed of the left wheel in RPM.
@@ -37,6 +39,19 @@ The communcation used was a basic serial communication with the following data p
     • XOR Checksum (1 byte): A single byte containing the Exclusive OR (XOR) checksum of the header and the four bytes representing the left and right velocities. This byte is used for basic error detection to ensure data integrity during transmission.
     • Dummy Byte (1 byte): A fixed byte, 0xEE, which acts as a placeholder or an additional validation byte within the protocol.
     • Terminator (1 byte): A fixed byte, 0xEF, signaling the definitive end of the data packet, aiding in proper packet demarcation.
+
+<img width="1200" height="598" alt="figure_3" src="Docs/figures/figure_3.png" />
+
+ESP32 -> Mega
+
+    • HEADER (1 byte): A fixed start byte, 0xAA, for packet synchronization and identification.
+    • THETA (4 bytes): Four bytes representing the desired heading in radians, encoded as a 32-bit floating-point number.
+    • DISTANCE (4 bytes): Four bytes representing the desired distance to travel in meters, also encoded as a 32-bit floating-point number.
+    • Checksum (1 byte): A single byte XOR checksum calculated over the HEADER, THETA, and DISTANCE bytes, providing a basic error detection mechanism for the command packet.
+    • Dummy Byte (1 byte): A fixed byte, 0xEE, included for protocol robustness and consistency.
+    • TERMINATOR (1 byte): A fixed end byte, 0xEF, for clear packet demarcation.
+
+<img width="1249" height="643" alt="figure_5" src="Docs/figures/figure_5.png" />
 
 
 
