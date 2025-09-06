@@ -57,7 +57,7 @@ Using micro-ROS library to integrate the ESP32 into the ROS ecosystem by publish
 
 - */currect_pose* publishes the robot’s instantaneous pose—x, y, and theta. In this setup, the ESP32 acts as the publisher, while the Raspberry Pi subscribes to the topic to use the data for localization and decision-making.
 
-- */desired_theta* publishes the desired steering angle, calculated using the VFH algorithm (more on that later). Here, the Raspberry Pi is the publisher, and the ESP32 subscribes to receive and forward the command to the motor controller.
+- */desired_theta* publishes the desired steering angle, calculated using the *VFH algorithm* (more on that later). Here, the Raspberry Pi is the publisher, and the ESP32 subscribes to receive and forward the command to the motor controller.
 
  
 ## Repository Breakdown
