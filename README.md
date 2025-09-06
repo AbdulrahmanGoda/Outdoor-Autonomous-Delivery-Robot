@@ -31,7 +31,7 @@ Generally speaking, I had to build two bridges to connect the three devices: one
 
 The bridge between the ESP32 and Mega follows a basic serial communication setup with the following data protocols:
 
-Mega -> ESP32
+**Mega -> ESP32**
 
     • Header (1 byte): A fixed byte, 0xAA, which serves as a clear indicator of the start of a valid data packet.
     • Left Velocity (2 bytes): A signed 16-bit integer representing the instantaneous speed of the left wheel in RPM.
@@ -42,7 +42,7 @@ Mega -> ESP32
 
 <img width="1200" height="598" alt="figure_3" src="Docs/figures/figure_3.png" />
 
-ESP32 -> Mega
+**ESP32 -> Mega**
 
     • HEADER (1 byte): A fixed start byte, 0xAA, for packet synchronization and identification.
     • THETA (4 bytes): Four bytes representing the desired heading in radians, encoded as a 32-bit floating-point number.
