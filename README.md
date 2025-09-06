@@ -1,6 +1,4 @@
-# Outdoor Autonomous Delivery Robot
-
-**Quick Overview**
+## Ouick Overview
 
 This repo hopefully walks you through the code I wrote for my graduation project—how it works, what its issues and limitations are, and how you can get it running on your own hardware.
 I originally wanted to use *MATLAB/Simulink* to build all the models and generate code with *Simulink Coder*. Sure, building everything from scratch gives you a tighter grip over the system and more flexibility—but with the limited time I had, it just wasn’t practical. So I had to make a few compromises.
@@ -21,7 +19,7 @@ The third—and thankfully final—compromise was using the [YDLiDAR ROS2 Driver
 The codebase is pretty diverse—it includes Simulink models, Arduino IDE code (C++), Python scripts, and a bunch of configuration files sprinkled throughout. Hope you enjoy digging into it. 
 
 
-**Communication Protocols**
+## Communication Protocols
 
 Achieving interoperability—aka getting three entirely different systems to work together and function as one cohesive unit—wasn’t exactly a walk in the park. But it was genuinely rewarding. At the heart of it all was communication: making sure each component could reliably exchange data, stay in sync, and respond in real time. That’s what turned a scattered set of devices into a unified system.
 
@@ -58,8 +56,7 @@ The bridge between the ESP32 and Mega follows a basic serial communication setup
 Using micro-ROS library to integrate the ESP32 into the ROS ecosystem by publishing and subscribing to two custom ROS2 topics:
 
  
-
-**Repo Breakdown**
+## Repository Breakdown
 
 As I hinted before, code execution is distributed across three platforms—Raspberry Pi, ESP32, and Arduino Mega. Each one handles a specific set of tasks to keep the system responsive and modular. For the Pi, and under the Models directory, you can find the core [VFH models](Models/vector-field-histogram-VFH). There are three main ones: one used for navigating from [start to goal](Models/vector-field-histogram-VFH/final_model.slx), another for navigating between [consecutive waypoints](Models/vector-field-histogram-VFH/final_model_waypoints.slx), and a third that was just used for [testing](Models/vector-field-histogram-VFH/vfh_testing.slx). Each model reflects a different stage of development, so feel free to explore them based on what you're trying to achieve.
 
