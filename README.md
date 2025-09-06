@@ -62,7 +62,7 @@ Using micro-ROS library to integrate the ESP32 into the ROS ecosystem by publish
  
 ## Vector Field Histogram (VFH)
 
-I'm not going to explain what [Vector Field Histogram](https://www.mathworks.com/help/nav/ug/vector-field-histograms.html) is—that's outside the scope of this repo. Instead, I’ll focus on why I chose to use it.
+I'm not going to explain what [Vector Field Histogram](https://www.mathworks.com/help/nav/ug/vector-field-histograms.html) is—that's outside the scope of this repo. Instead, I’ll focus on why I chose to use it. Normally, when designing an autonomous system, a few familiar names immediately come to mind—SLAM, A⁎, RRT⁎, and so on. These algorithms and frameworks have become staples in robotics.
 
 
 ## Repository Breakdown
