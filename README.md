@@ -62,12 +62,16 @@ Using micro-ROS library to integrate the ESP32 into the ROS ecosystem by publish
  
 ## Vector Field Histogram (VFH)
 
-I'm not going to explain what [Vector Field Histogram](https://www.mathworks.com/help/nav/ug/vector-field-histograms.html) is—that's outside the scope of this repo. Instead, I’ll focus on why I chose to use it. Normally, when designing an autonomous system, a few familiar names immediately come to mind—SLAM, A⁎, RRT⁎, and so on. These algorithms and frameworks have become staples in robotics.
+I'm not going to explain what [Vector Field Histogram](https://www.mathworks.com/help/nav/ug/vector-field-histograms.html) is—that's outside the scope of this repo. Instead, I’ll focus on why I chose to use it. 
+
+Normally, when designing an autonomous system, a few familiar names immediately pop into your head—*SLAM, A⁎, RRT⁎*, and so on. These are the classics of autonomous navigation, and for good reason—they’re powerful and widely used.
+
+Unfortunately, these algorithms weren’t the right fit. The biggest issue was scalability. Depending on your hardware, mapping and localizing in a small 25-square-meter room using SLAM might take on average a second or two—which is fine. But scale that up to a 1km by 1km environment, and the localization delay becomes impractical. The computational load grows rapidly, and real-time performance starts to fall apart.  In short, these algorithms are powerful, but they’re not designed for lightweight, fast-response systems like the one I was building. That’s exactly where Vector Field Histogram came to the rescue. It’s much simpler, faster, and way more resource-friendly—perfect for local navigation without the overhead of full-scale mapping.
+
+The [VFH models](Models/vector-field-histogram-VFH) can be found under the Models directory. There are three main models: one for navigating from [start to goal](Models/vector-field-histogram-VFH/final_model.slx), another for moving between [consecutive waypoints](Models/vector-field-histogram-VFH/final_model_waypoints.slx), and a third that was just used for [testing](Models/vector-field-histogram-VFH/vfh_testing.slx). Each model represents a different stage of development, so feel free to dive in and see what works best for your setup.
 
 
 ## Repository Breakdown
-
-As I hinted before, code execution is distributed across three platforms—Raspberry Pi, ESP32, and Arduino Mega. Each one handles a specific set of tasks to keep the system responsive and modular. For the Pi, and under the Models directory, you can find the core [VFH models](Models/vector-field-histogram-VFH). There are three main ones: one used for navigating from [start to goal](Models/vector-field-histogram-VFH/final_model.slx), another for navigating between [consecutive waypoints](Models/vector-field-histogram-VFH/final_model_waypoints.slx), and a third that was just used for [testing](Models/vector-field-histogram-VFH/vfh_testing.slx). Each model reflects a different stage of development, so feel free to explore them based on what you're trying to achieve.
 
 The ESP32 was programmed using the fantastic mirco-ROS library, the respective files can be found [here](Src/arduinoIDE). As for the Arduino, the control models are hanging out just about [here](Models/differential-controller).
 
