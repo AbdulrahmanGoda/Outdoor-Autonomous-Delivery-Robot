@@ -30,7 +30,7 @@ The system uses [Microsoft Bing Maps APIs](https://learn.microsoft.com/en-us/bin
 
 For local navigation, the robot relies on the  [Vector Field Histogram](https://www.mathworks.com/help/nav/ug/vector-field-histograms.html) algorithm. It’s widely recognized for its simplicity, speed, and effectiveness in real-time obstacle avoidance, making it a great fit for resource-constrained systems like this one.
 
-<img width="2032" height="799" alt="figure_3" src="Docs/figures/figure_3.png" />
+<img width="2032" height="699" alt="figure_3" src="Docs/figures/figure_3.png" />
 
 Just a heads-up: Bing Maps’ routing API is being phased out, and things are moving toward the Azure Maps Route Directions API. It’s part of a broader shift to more modern, cloud-native mapping tools, which is something to keep in mind for future updates.
 
