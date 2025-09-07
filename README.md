@@ -18,6 +18,22 @@ The third—and thankfully final—compromise was using the [YDLiDAR ROS2 Driver
 
 The codebase is pretty diverse—it includes Simulink models, Arduino IDE code (C++), Python scripts, and a bunch of configuration files sprinkled throughout. Hope you enjoy digging into it. 
 
+## System Structure
+
+Normally, when designing an autonomous system, a few familiar names immediately pop into your head—*SLAM, A⁎, RRT⁎*, and so on. These are the classics of autonomous navigation, and for good reason—they’re powerful and widely used.
+
+Unfortunately, these algorithms weren’t the right fit for the project. The biggest issue was scalability. Depending on your hardware, mapping and localizing in a small 25-square-meter room using SLAM might take on average a second or two—which is fine. But scale that up to a 1km by 1km environment, and the localization delay becomes impractical. The computational load grows rapidly, and real-time performance starts to fall apart. In short, these algorithms are powerful, but they’re not designed for lightweight, fast-response systems like the one I was building.
+
+To work around the limitations of traditional algorithms—especially in large outdoor areas—the robot uses a hierarchical navigation strategy. That means it combines cloud-based global planning on the higher level with a lower level real-time local obstacle avoidance onboard.
+
+The system uses [Microsoft Bing Maps APIs](https://learn.microsoft.com/en-us/bingmaps/rest-services/locations/) to generate a global path from the robot’s current location to its destination. The API returns a set of waypoints that define the overall route, allowing the robot to focus on navigating between them locally—without the burden of full-scale path planning onboard.
+
+For local navigation, the robot relies on the  [Vector Field Histogram](https://www.mathworks.com/help/nav/ug/vector-field-histograms.html) algorithm. It’s widely recognized for its simplicity, speed, and effectiveness in real-time obstacle avoidance, making it a great fit for resource-constrained systems like this one.
+
+Just a heads-up: Bing Maps’ routing API is being phased out, and things are moving toward the Azure Maps Route Directions API. It’s part of a broader shift to more modern, cloud-native mapping tools, which is something to keep in mind for future updates.
+
+Both VFH and Bing models can be found under the Models directory. Note that there are three different VFH models: one for navigating from [start to goal](Models/vector-field-histogram-VFH/final_model.slx), another for moving between [consecutive waypoints](Models/vector-field-histogram-VFH/final_model_waypoints.slx), and a third that was just used for [testing](Models/vector-field-histogram-VFH/vfh_testing.slx). Each model represents a different stage of development, so feel free to dive in and see what works best for your setup.
+
 
 ## Communication Protocols
 
@@ -58,18 +74,6 @@ Using micro-ROS library to integrate the ESP32 into the ROS ecosystem by publish
 - */currect_pose* publishes the robot’s instantaneous pose—x, y, and theta. In this setup, the ESP32 acts as the publisher, while the Raspberry Pi subscribes to the topic to use the data for localization and decision-making.
 
 - */desired_theta* publishes the desired steering angle, calculated using the *VFH algorithm* (more on that later). Here, the Raspberry Pi is the publisher, and the ESP32 subscribes to receive and forward the command to the motor controller.
-
- 
-## Vector Field Histogram (VFH)
-
-I'm not going to explain what [Vector Field Histogram](https://www.mathworks.com/help/nav/ug/vector-field-histograms.html) is—that's outside the scope of this repo. Instead, I’ll focus on why I chose to use it. 
-
-Normally, when designing an autonomous system, a few familiar names immediately pop into your head—*SLAM, A⁎, RRT⁎*, and so on. These are the classics of autonomous navigation, and for good reason—they’re powerful and widely used.
-
-Unfortunately, these algorithms weren’t the right fit. The biggest issue was scalability. Depending on your hardware, mapping and localizing in a small 25-square-meter room using SLAM might take on average a second or two—which is fine. But scale that up to a 1km by 1km environment, and the localization delay becomes impractical. The computational load grows rapidly, and real-time performance starts to fall apart.  In short, these algorithms are powerful, but they’re not designed for lightweight, fast-response systems like the one I was building. That’s exactly where Vector Field Histogram came to the rescue. It’s much simpler, faster, and way more resource-friendly—perfect for local navigation without the overhead of full-scale mapping.
-
-The [VFH models](Models/vector-field-histogram-VFH) can be found under the Models directory. There are three main models: one for navigating from [start to goal](Models/vector-field-histogram-VFH/final_model.slx), another for moving between [consecutive waypoints](Models/vector-field-histogram-VFH/final_model_waypoints.slx), and a third that was just used for [testing](Models/vector-field-histogram-VFH/vfh_testing.slx). Each model represents a different stage of development, so feel free to dive in and see what works best for your setup.
-
 
 ## Repository Breakdown
 
