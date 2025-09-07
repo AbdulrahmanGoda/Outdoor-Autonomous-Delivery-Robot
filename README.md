@@ -1,5 +1,6 @@
 ### Outdoor Autonomous Delivery Robot
 
+<img width="1879" height="885" alt="figure_4" src="Docs/figures/figure_4.png" />
 
 ## Table of Contents
 
