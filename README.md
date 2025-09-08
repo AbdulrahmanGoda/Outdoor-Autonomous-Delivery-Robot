@@ -5,8 +5,7 @@
 ## Table of Contents
 
 - [Quick Overview](#quick-overview)
-- [Prerequisites](#prerequisites)
-- [Tools Used](#tools-used)
+- [Prerequisites & Tools](#Prerequisites-&-Tools)
 - [System Structure](#system-structure)
 - [Communication Protocols](#communication-protocols)
 - [ESP32 Bridge](#ESP32-Bridge)
