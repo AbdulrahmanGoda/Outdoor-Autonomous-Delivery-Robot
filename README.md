@@ -10,6 +10,13 @@
 - [Communication Protocols](#communication-protocols)
 - [ESP32 Bridge](#ESP32-Bridge)
 
+---
+
+> **Note:**  
+> This repository is *not* a step-by-step tutorial or beginner's guide. It assumes you already have a solid background in robotics, embedded systems, ROS 2, hardware integration, and all the tools and platforms listed below. If you're looking for detailed instructions or a hand-holding walkthrough, this may not be the best starting point.
+
+---
+
 ## Quick Overview
 
 This repo hopefully walks you through the code I wrote for my graduation project—how it works, what its issues and limitations are, and how you can get it running on your own hardware.
