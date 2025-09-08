@@ -11,7 +11,7 @@
 
 ## Repository Purpose
 
-This Repository documents the code and design for an outdoor autonomous delivery robot, built for my graduation project. It covers overall system architecture, design choices, and integration of ROS 2, micro-ROS, sensor fusion, and custom hardware. The repo is intended as a reference for advanced users building similar systems.
+This Repository documents the code and design for an outdoor autonomous delivery robot, built for my graduation project. It covers overall system architecture, design choices, and integration of ROS 2, micro-ROS, sensor fusion, and custom hardware. The repo is intended for advanced users building similar systems.
 
 
 ## Table of Contents
