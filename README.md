@@ -29,6 +29,10 @@ The third—and thankfully final—compromise was using the [YDLiDAR ROS2 Driver
 
 The codebase is pretty diverse—it includes Simulink models, Arduino IDE code (C++), Python scripts, and a bunch of configuration files sprinkled throughout. Hope you enjoy digging into it. 
 
+## Prerequisites
+
+
+
 ## System Structure
 
 Normally, when designing an autonomous system, a few familiar names immediately pop into your head—*SLAM, A⁎, RRT⁎*, and so on. These are the classics of autonomous navigation, and for good reason—they’re powerful and widely used.
@@ -88,8 +92,10 @@ Using micro-ROS library to integrate the ESP32 into the ROS ecosystem by publish
 
 - */desired_theta* publishes the desired steering angle, calculated using the *VFH algorithm* (more on that later). Here, the Raspberry Pi is the publisher, and the ESP32 subscribes to receive and forward the command to the motor controller.
 
-## Repository Breakdown
+## ESP32 Bridge
 
-The ESP32 was programmed using the fantastic mirco-ROS library, the respective files can be found [here](Src/arduinoIDE). As for the Arduino, the control models are hanging out just about [here](Models/differential-controller).
+Inside the [/Src/arduinoIDE](Src/arduinoIDE) directory, you’ll find four different files. Three of them were used to test individual parts of the system—one where the ESP32 acts only as a [publisher](Src/arduinoIDE/esp32_publisher.ino), another as a [subscriber](Src/arduinoIDE/esp32_subscriber.ino), and a third where it handles [both roles](Src/arduinoIDE/esp32_active_serial.ino). These were tested separately to make sure each function worked as expected.
 
-Additional ROS packages that made development and testing way easier can be found in a separate repo. It’s mainly there to simplify the build process and keep this main repo a little less messy. [Link]
+The [fourth file](Src/arduinoIDE/esp32_bno055.ino) is the final version that was actually deployed to the ESP32. It includes everything from the previous tests, plus the code for sensor fusion with the BNO055, which provides orientation data for more accurate navigation.
+
+You’ll find some additional Python ROS packages inside the [/Src/ros2_ws](/Src/ros2_ws) directory. These were super helpful during development and testing, and they’re kept separate to make the main repo cleaner and easier to manage. Just make sure to build the packages inside ros2_ws before running anything—they’re part of the overall setup.
