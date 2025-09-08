@@ -5,9 +5,11 @@
 ## Table of Contents
 
 - [Quick Overview](#quick-overview)
+- [Prerequisites](#prerequisites)
+- [Tools Used](#tools-used)
 - [System Structure](#system-structure)
 - [Communication Protocols](#communication-protocols)
-- [Repository Breakdown](#repository-breakdown)
+- [ESP32 Bridge](#ESP32-Bridge)
 
 ## Quick Overview
 
@@ -31,7 +33,64 @@ The codebase is pretty diverse—it includes Simulink models, Arduino IDE code (
 
 ## Prerequisites
 
+Before running or deploying this project, make sure you have the following:
 
+- **Hardware:**
+  - Raspberry Pi 4 Model B (Recommended: 4GB RAM or more)
+  - Arduino Mega 2560
+  - ESP32 Dev Board (with micro-ROS support)
+  - YDLiDAR (tested with X2 model)
+  - BNO055 IMU Sensor
+  - Hacked hoverboard motors (see [Hoverboard Firmware Hack repo](https://github.com/EmanuelFeru/hoverboard-firmware-hack-FOC) for details)
+  - Power supply for each board and peripherals
+  - Optional: Chassis, wheels, and mounting hardware
+
+- **Software & Libraries:**
+  - [ROS 2 Humble Hawksbill](https://docs.ros.org/en/humble/Installation.html) (for Raspberry Pi)
+  - [micro-ROS for ESP32](https://micro.ros.org/docs/tutorials/core/teensy-esp32/)
+  - [Arduino IDE](https://www.arduino.cc/en/software) (for Mega and ESP32 firmware)
+  - [Simulink](https://www.mathworks.com/products/simulink.html) with Simulink Coder (for modeling and code generation)
+  - [YDLiDAR ROS2 Driver](https://github.com/YDLIDAR/ydlidar_ros2_driver)
+  - Python 3.10+ and required ROS 2 Python packages
+  - Git (for cloning the repo)
+
+- **Accounts & APIs:**
+  - [Microsoft Bing Maps API Key](https://www.microsoft.com/en-us/maps/create-a-bing-maps-key) (for global path planning)
+  - Optional: [Azure Maps Route Directions API Key](https://learn.microsoft.com/en-us/azure/azure-maps/how-to-manage-authentication)
+
+- **Development Tools:**
+  - VS Code or any code editor of your choice
+  - Serial monitor (eg. Arduino Serial Monitor, minicom, or similar) for debugging communications
+
+## Tools Used
+
+This project relies on a diverse set of tools and frameworks:
+
+- **Hardware Platforms:**
+  - Raspberry Pi 4 (main compute unit, runs ROS 2 nodes)
+  - ESP32 (handles micro-ROS bridge, sensor fusion, odometry)
+  - Arduino Mega (low-level motor control and encoder reading)
+  - YDLiDAR (LIDAR sensor for perception)
+  - BNO055 (IMU for orientation)
+  - Hacked hoverboard motors ([firmware/hardware details](https://github.com/EmanuelFeru/hoverboard-firmware-hack-FOC))
+
+- **Software & Frameworks:**
+  - **ROS 2 Humble**: Middleware for robot software integration, communication, and modular development
+  - **micro-ROS**: Lightweight ROS 2 client for microcontrollers like ESP32
+  - **MATLAB/Simulink + Simulink Coder**: For model-based development and code generation, especially for control algorithms (VFH, etc.)
+  - **Arduino IDE**: Firmware development for Mega and ESP32
+  - **Python 3**: For ROS 2 nodes, scripts, and prototyping
+  - **C++**: For Arduino and some performance-critical code
+  - **YDLiDAR ROS2 Driver**: For LIDAR sensor integration
+
+- **APIs & Online Services:**
+  - **Microsoft Bing Maps API**: Used for global route planning
+  - **Azure Maps Route Directions API**: (Recommended for future-proofing global navigation)
+  - **Git & GitHub**: Version control and project management
+
+- **Other Utilities:**
+  - Serial communication tools for debugging hardware interfaces
+  - Visualization tools (eg. RViz2) for ROS 2 data inspection
 
 ## System Structure
 
