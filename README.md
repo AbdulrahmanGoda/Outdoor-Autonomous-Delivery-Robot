@@ -73,7 +73,7 @@ Normally, when designing an autonomous system, a few familiar names immediately 
 
 Unfortunately, these algorithms weren’t the right fit for the project. The biggest issue was scalability. Depending on your hardware, mapping and localizing in a small 25-square-meter room using SLAM might take on average a second or two—which is fine. But scale that up to a 1km by 1km environment, and the localization delay becomes impractical. The computational load grows rapidly, and real-time performance starts to fall apart. In short, these algorithms are powerful, but they’re not designed for lightweight, fast-response systems like the one I was building.
 
-To work around the limitations of traditional algorithms—especially in large outdoor areas—the robot uses a hierarchical navigation strategy. That means it combines cloud-based global planning on the higher level with a lower level real-time local obstacle avoidance onboard.
+To overcome the limitations of traditional algorithms in large outdoor environments, the robot adopts a **hierarchical navigation strategy**. This approach integrates cloud-based global path planning at the higher level with onboard, real-time local obstacle avoidance at the lower level.
 
 The system uses [Microsoft Bing Maps APIs](https://learn.microsoft.com/en-us/bingmaps/rest-services/locations/) to generate a global path from the robot’s current location to its destination. The API returns a set of waypoints that define the overall route, allowing the robot to focus on navigating between them locally—without the burden of full-scale path planning onboard.
 
