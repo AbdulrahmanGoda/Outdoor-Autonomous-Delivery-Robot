@@ -20,7 +20,9 @@ This Repository documents the code and design for an outdoor autonomous delivery
 - [Quick Overview](#quick-overview)
 - [System Structure](#system-structure)
 - [Communication Protocols](#communication-protocols)
-- [ESP32 Bridge](#ESP32-Bridge)
+- [Src Directory](#Src-Directory)
+- [Setup Guide](#Setup-Guide)
+- [Contact Me](#Contact-Me)
 
 ## Prerequisites & Tools
 
@@ -126,10 +128,67 @@ Using micro-ROS library to integrate the ESP32 into the ROS ecosystem by publish
 
 - */desired_theta* publishes the desired steering angle, calculated using the *VFH algorithm*. Here, the Raspberry Pi is the publisher, and the ESP32 subscribes to receive and forward the command to the motor controller.
 
-## ESP32 Bridge
+## Src Directory  
 
-Inside the [/Src/arduinoIDE](Src/arduinoIDE) directory, you’ll find four different files. Three of them were used to test individual parts of the system—one where the ESP32 acts only as a [publisher](Src/arduinoIDE/esp32_publisher.ino), another as a [subscriber](Src/arduinoIDE/esp32_subscriber.ino), and a third where it handles [both roles](Src/arduinoIDE/esp32_active_serial.ino). These were tested separately to make sure each function worked as expected.
+Inside the [/Src/arduinoIDE](Src/arduinoIDE) sub-directory, you’ll find four different files. Three of them were used to test individual parts of the system—one where the ESP32 acts only as a [publisher](Src/arduinoIDE/esp32_publisher.ino), another as a [subscriber](Src/arduinoIDE/esp32_subscriber.ino), and a third where it handles [both roles](Src/arduinoIDE/esp32_active_serial.ino). These were tested separately to make sure each function worked as expected.
 
 The [fourth file](Src/arduinoIDE/esp32_bno055.ino) is the final version that was actually deployed to the ESP32. It includes everything from the previous tests, plus the code for sensor fusion with the BNO055, which provides orientation data for more accurate navigation.
 
-You’ll find some additional Python ROS packages inside the [/Src/ros2_ws](/Src/ros2_ws) directory. These were super helpful during development and testing, and they’re kept separate to make the main repo cleaner and easier to manage. Just make sure to build the packages inside ros2_ws before running anything—they’re part of the overall setup.
+You’ll find some additional Python ROS packages inside the [/Src/ros2_ws](/Src/ros2_ws) sub-directory. These were super helpful during development and testing, and they’re kept separate to make the main repo cleaner and easier to manage. Just make sure to build the packages inside ros2_ws before running anything—they’re part of the overall setup.
+
+
+## Setup Guide
+
+Assuming you’ve got the right hardware—and maybe even a bit of experience with complex robotics stacks—you might be able to get this project running by following the steps below. Even if you're new to this and luck’s on your side, things might just work out without major issues—just kidding.
+
+1. **Clone the Repository**
+    ```sh
+    git clone https://github.com/AbdulrahmanGoda/Outdoor-Autonomous-Delivery-Robot.git
+    cd Outdoor-Autonomous-Delivery-Robot
+    ```
+
+2. **Prepare Your Hardware**
+    - Assemble your platform: Raspberry Pi 4, Arduino Mega 2560, ESP32, YDLiDAR, BNO055 IMU, and hacked hoverboard motors ([firmware/hardware details](https://github.com/EmanuelFeru/hoverboard-firmware-hack-FOC)).
+    - Flash the hoverboard motor controllers with the required firmware.
+    - Wire up all communication lines as described in the documentation.
+
+3. **Install ROS 2 Humble on the Raspberry Pi**
+    - Follow the [official ROS 2 Humble installation guide](https://docs.ros.org/en/humble/Installation.html) for your OS (Ubuntu recommended).
+    - Source your ROS 2 environment:
+      ```sh
+      source /opt/ros/humble/setup.bash
+      ```
+      
+4. **Flash Firmware to ESP32**
+    - Open the Arduino sketches in `Src/arduinoIDE/` using the [Arduino IDE](https://www.arduino.cc/en/software).
+    - Ensure you have the [micro-ROS library](https://micro.ros.org/docs/tutorials/core/teensy-esp32/) for ESP32.
+    - Upload [this code](Src/arduinoIDE/esp32_bno055.ino) to your ESP32.
+
+5. **Simulink Model Deployment**
+   
+   Make sure your MATLAB installation has both **Simulink** and the **ROS Toolbox** installed.
+   
+   5.1. **Raspberry Pi**
+    - Open the models in the `Models/` directory with Simulink.
+    - Use the ROS Toolbox to build and deploy [start to goal](Models/vector-field-histogram-VFH/final_model.slx) (refer to [MathWorks ROS Toolbox documentation](https://www.mathworks.com/help/ros/) if needed).
+      
+   5.2. **Arduino Mega**
+    - Open the models in the `Models/differential-controller/` directory with Simulink.
+    - Deploy this [control model](Models/differential-controller/diff_controller_PID.slx) to the Arduino Mega using Simulink’s hardware support package for Arduino.
+      
+6. **Configure and Launch the System**
+    - Connect all devices via the required interfaces (USB, UART, etc.).
+    - Launch your main ROS 2 nodes and drivers (e.g., YDLiDAR ROS2 driver).
+    - Enjoy.
+
+---
+
+> **Tip:**  
+> Since this is not a tutorial, refer to the code, comments, and hardware documentation for interface details and any further configuration. Advanced troubleshooting may require reading peripheral datasheets and ROS 2/micro-ROS documentation.
+
+---
+
+## Contact Me
+
+If you encounter an issue, have a question, or need clarification about this project, feel free to open an issue on this repository.  
+You can also reach out to me directly via [LinkedIn](https://www.linkedin.com/in/abdulrahman-goda-899700233/) or Email: abdulrahmangoda@hotmail.com.
