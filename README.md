@@ -184,7 +184,7 @@ Assuming you’ve got the right hardware—and maybe even a bit of experience wi
 ---
 
 > **Tip:**  
-> Since this is not a tutorial, refer to the code, comments, and hardware documentation for interface details and any further configuration. Advanced troubleshooting may require reading peripheral datasheets and ROS 2/micro-ROS documentation.
+> Since this is not a tutorial, refer to the code, comments, and hardware documentation for interface details and any further configuration.
 
 ---
 
