@@ -137,6 +137,7 @@ The [fourth file](Src/arduinoIDE/esp32_bno055.ino) is the final version that was
 
 You’ll find some additional Python ROS packages inside the [/Src/ros2_ws](/Src/ros2_ws) sub-directory. These were super helpful during development and testing, and they’re kept separate to make the main repo cleaner and easier to manage. Just make sure to build the packages inside ros2_ws before running anything—they’re part of the overall setup.
 
+## Simulation 
 
 ## Setup Guide
 
