@@ -139,6 +139,8 @@ You’ll find some additional Python ROS packages inside the [/Src/ros2_ws](/Src
 
 ## Simulation 
 
+...
+
 ## Setup Guide
 
 Assuming you’ve got the right hardware—and maybe even a bit of experience with complex robotics stacks—you might be able to get this project running by following the steps below. Even if you're new to this and luck’s on your side, things might just work out without major issues—just kidding.
