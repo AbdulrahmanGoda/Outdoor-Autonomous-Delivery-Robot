@@ -139,6 +139,9 @@ You’ll find some additional Python ROS packages inside the [/Src/ros2_ws](/Src
 
 ## Simulation 
 
+<img width="1920" height="1080" alt="figure_5" src="Docs/figures/figure_5.png" />
+
+
 ...
 
 ## Setup Guide
