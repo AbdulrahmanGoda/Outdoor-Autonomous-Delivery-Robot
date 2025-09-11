@@ -118,7 +118,7 @@ The bridge between the ESP32 and Mega follows a basic serial communication setup
     • Dummy Byte (1 byte): A fixed byte, 0xEE, included for protocol robustness and consistency.
     • TERMINATOR (1 byte): A fixed end byte, 0xEF, for clear packet demarcation.
 
- 
+
 
 
 **Pi <-> ESP32**
